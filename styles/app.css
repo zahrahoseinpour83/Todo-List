@@ -1,0 +1,902 @@
+/* ========================================
+   1. RESET
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   2. CSS VARIABLES
+======================================== */
+
+:root {
+  --priority-white: #ffffff;
+  --priority-bg-black: #121215;
+  --priority-purple: #764ff7;
+  --priority-purple-hover: #8b6aff;
+  --priority-main-bg: #18181c;
+  --priority-gray: #636366;
+  --priority-muted: #9999a5;
+  --priority-border: #34313e;
+
+  --priority-close-bg: #2b1d22;
+  --priority-close-border: #51343b;
+  --priority-close-color: #ff7b86;
+  --priority-close-hover: #ff5964;
+
+  --shadow: 0 24px 70px rgb(0 0 0 / 18%);
+  --transition: 0.2s ease;
+}
+
+/* ========================================
+   3. GENERAL STYLES
+======================================== */
+
+body {
+  min-height: 100vh;
+  background-color: var(--priority-bg-black);
+  color: var(--priority-white);
+  font-family: sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--priority-purple);
+  outline-offset: 3px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========================================
+   4. HEADER AND LOGO
+======================================== */
+
+.header {
+  width: 100%;
+  text-align: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  margin: 1rem 0;
+}
+
+.logo-img {
+  width: 50px;
+  height: auto;
+}
+
+.logo > span {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.logo-first {
+  color: var(--priority-white);
+}
+
+.logo-last {
+  color: var(--priority-purple);
+}
+
+.logo-text {
+  color: var(--priority-white);
+  line-height: 1.6;
+}
+
+/* ========================================
+   5. MAIN CONTAINER
+======================================== */
+
+.main {
+  position: relative;
+
+  width: 100%;
+  min-height: 400px;
+  margin: 1.5rem 0;
+  padding: 24px 24px 90px;
+
+  background-color: var(--priority-main-bg);
+  border: 1px solid rgb(255 255 255 / 3%);
+  border-radius: 20px;
+}
+
+.main h1 {
+  margin-bottom: 24px;
+
+  color: var(--priority-white);
+  text-align: center;
+  font-size: 24px;
+}
+
+/* ========================================
+   6. SEARCH FORM
+======================================== */
+
+.search-box__container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  margin: 0 auto 2rem;
+}
+
+.search-box {
+  width: 100%;
+  min-width: 0;
+}
+
+.search-box input {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+  padding: 14px 16px;
+
+  background-color: var(--priority-gray);
+  color: var(--priority-white);
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  transition:
+    border-color var(--transition),
+    background-color var(--transition);
+}
+
+.search-box input::placeholder {
+  color: #e0e0e0;
+}
+
+.search-box input:focus {
+  border-color: var(--priority-purple);
+  background-color: #414147;
+}
+
+/* Search Button */
+
+.search-box__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  background-color: var(--priority-purple);
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background-color var(--transition);
+}
+
+.search-box__btn img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.search-box__btn:hover {
+  transform: scale(1.05);
+  background-color: var(--priority-purple-hover);
+  box-shadow: var(--shadow);
+}
+
+/* ========================================
+   7. TASK COUNTERS
+======================================== */
+
+.task-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+
+  color: var(--priority-white);
+  border-bottom: 1px solid var(--priority-gray);
+}
+
+.task-info__left,
+.task-info__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#totalTasks,
+#completedTasks {
+  color: var(--priority-purple);
+  font-weight: 700;
+}
+
+/* ========================================
+   8. TODO FILTERS
+======================================== */
+
+.todo-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  width: fit-content;
+  max-width: 100%;
+  padding: 5px;
+  margin: 0 auto 24px;
+
+  background-color: var(--priority-bg-black);
+  border: 1px solid #29292f;
+  border-radius: 14px;
+}
+
+/* Individual Filter Buttons */
+
+.filter-btn {
+  padding: 10px 16px;
+
+  background-color: transparent;
+  color: var(--priority-muted);
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition);
+}
+
+.filter-btn:hover {
+  background-color: #25232d;
+  color: var(--priority-white);
+}
+
+.filter-btn.active {
+  background-color: var(--priority-purple);
+  color: var(--priority-white);
+  box-shadow: 0 4px 14px rgb(118 79 247 / 20%);
+}
+
+/* ========================================
+   9. TODO LIST AND EMPTY STATE
+======================================== */
+
+.todo-list {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  color: var(--priority-gray);
+  line-height: 1.8;
+  text-align: center;
+}
+
+.todo-list__items {
+  width: 100%;
+  list-style: none;
+  text-align: left;
+}
+
+/* Empty State */
+
+.todo-list__none {
+  padding: 24px 0;
+
+  color: var(--priority-gray);
+  text-align: center;
+}
+
+.todo-list__none img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 12px;
+  object-fit: contain;
+}
+
+.todo-list__none p {
+  margin: 4px 0;
+}
+
+/* ========================================
+   10. TODO ITEM
+======================================== */
+
+.todo-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 60px;
+  padding: 12px 15px;
+  margin: 12px 0;
+
+  background-color: var(--priority-bg-black);
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  transition:
+    border-color var(--transition),
+    background-color var(--transition);
+}
+
+/* Left and Right Sections Inside Each Task */
+
+.todo-list__item > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Task Card Hover */
+
+.todo-list__item:hover {
+  border-color: var(--priority-border);
+}
+
+/* Complete Task Button */
+
+.todo-list__check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  width: 22px;
+  height: 22px;
+
+  background-color: transparent;
+  color: var(--priority-white);
+
+  border: 1px solid var(--priority-white);
+  border-radius: 50%;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.todo-list__check:hover {
+  border-color: var(--priority-purple);
+  transform: scale(1.08);
+}
+
+/* Task Title */
+
+.todo-list__title {
+  color: var(--priority-white);
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+/* Completed Task */
+
+.todo-list__item.completed .todo-list__check {
+  background-color: var(--priority-purple);
+  border-color: var(--priority-purple);
+}
+
+.todo-list__item.completed .todo-list__title {
+  color: var(--priority-muted);
+  text-decoration: line-through;
+}
+
+/* ========================================
+   11. TASK DATE AND ACTION BUTTONS
+======================================== */
+
+/* Date + Edit + Delete */
+
+.todo-list__item > div:last-child {
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.todo-list__item time {
+  color: var(--priority-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Edit Button */
+
+.todo-list__edit {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  min-width: 64px;
+  height: 36px;
+  padding: 0 14px;
+
+  background-color: rgb(118 79 247 / 10%);
+  color: #b9a7ff;
+
+  border: 1px solid rgb(118 79 247 / 45%);
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.todo-list__edit:hover {
+  background-color: var(--priority-purple);
+  border-color: var(--priority-purple);
+  color: var(--priority-white);
+  transform: translateY(-1px);
+}
+
+/* Delete / Close Button */
+
+.todo-list__close {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  background-color: var(--priority-close-bg);
+  color: var(--priority-close-color);
+
+  border: 1px solid var(--priority-close-border);
+  border-radius: 10px;
+
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.todo-list__close:hover {
+  background-color: var(--priority-close-hover);
+  border-color: var(--priority-close-hover);
+  color: var(--priority-white);
+  transform: scale(1.05);
+}
+
+/* ========================================
+   12. ADD TODO BUTTON
+======================================== */
+
+.add-todo {
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 54px;
+  height: 54px;
+
+  background-color: var(--priority-purple);
+  color: var(--priority-white);
+
+  border: none;
+  border-radius: 17px;
+
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgb(118 79 247 / 25%);
+
+  transition:
+    transform var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.add-todo:hover {
+  transform: translateY(-3px);
+  background-color: var(--priority-purple-hover);
+  box-shadow: 0 12px 28px rgb(118 79 247 / 30%);
+}
+
+.add-todo svg {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
+/* ========================================
+   13. MODAL OVERLAY
+======================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  background-color: rgb(0 0 0 / 70%);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+/* Modal Open State */
+
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Modal Box */
+
+.todo-modal {
+  width: 100%;
+  max-width: 430px;
+  padding: 28px;
+
+  background-color: var(--priority-main-bg);
+  border: 1px solid var(--priority-border);
+  border-radius: 22px;
+
+  box-shadow: 0 20px 70px rgb(0 0 0 / 40%);
+
+  transform: translateY(15px) scale(0.98);
+  transition: transform 0.25s ease;
+}
+
+.modal-overlay.show .todo-modal {
+  transform: translateY(0) scale(1);
+}
+
+.todo-modal h2 {
+  margin-bottom: 8px;
+
+  color: var(--priority-white);
+  font-size: 22px;
+}
+
+.modal-description {
+  margin-bottom: 24px;
+
+  color: var(--priority-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   14. MODAL INPUT
+======================================== */
+
+.todo-modal label {
+  display: block;
+  margin-bottom: 10px;
+
+  color: #e5e5eb;
+  font-size: 14px;
+}
+
+.modal-input {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+  padding: 14px;
+
+  background-color: var(--priority-bg-black);
+  color: var(--priority-white);
+
+  border: 1px solid #35353d;
+  border-radius: 12px;
+
+  font-size: 15px;
+
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.modal-input::placeholder {
+  color: #686875;
+}
+
+.modal-input:focus {
+  border-color: var(--priority-purple);
+  box-shadow: 0 0 0 3px rgb(118 79 247 / 15%);
+}
+
+/* ========================================
+   15. MODAL ACTION BUTTONS
+======================================== */
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 26px;
+}
+
+.modal-btn {
+  padding: 11px 18px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+}
+
+/* Cancel Button */
+
+.cancel-btn {
+  background-color: #222227;
+  border-color: #35353d;
+  color: #d1d1da;
+}
+
+.cancel-btn:hover {
+  background-color: #303037;
+}
+
+/* Add / Save Button */
+
+.add-btn {
+  background-color: var(--priority-purple);
+  color: var(--priority-white);
+}
+
+.add-btn:hover {
+  background-color: var(--priority-purple-hover);
+}
+
+/* ========================================
+   16. RESPONSIVE DESIGN - TABLETS AND MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  /* Main Layout */
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .main {
+    padding: 20px 16px 86px;
+  }
+
+  /* Logo */
+
+  .logo-text {
+    font-size: 14px;
+  }
+
+  /* Search */
+
+  .search-box__container {
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Task Counters */
+
+  .task-info {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .task-info__left,
+  .task-info__right {
+    gap: 5px;
+  }
+
+  /* Filters */
+
+  .todo-filters {
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+
+  .filter-btn {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  /* Task Card */
+
+  .todo-list__item {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .todo-list__item > div {
+    gap: 8px;
+  }
+
+  .todo-list__item > div:last-child {
+    gap: 6px;
+  }
+
+  .todo-list__title {
+    font-size: 14px;
+  }
+
+  .todo-list__item time {
+    font-size: 10px;
+  }
+
+  /* Edit Button */
+
+  .todo-list__edit {
+    min-width: 54px;
+    height: 34px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  /* Delete Button */
+
+  .todo-list__close {
+    width: 36px;
+    height: 36px;
+    font-size: 25px;
+  }
+
+  /* Add Button */
+
+  .add-todo {
+    right: 16px;
+    bottom: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Modal */
+
+  .todo-modal {
+    padding: 22px;
+  }
+}
+
+/* ========================================
+   17. RESPONSIVE DESIGN - SMALL PHONES
+======================================== */
+
+@media (max-width: 380px) {
+  .main {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .todo-list__item {
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .todo-list__item > div {
+    gap: 6px;
+  }
+
+  .todo-list__item > div:last-child {
+    gap: 4px;
+  }
+
+  .todo-list__item time {
+    display: none;
+  }
+
+  .todo-list__edit {
+    min-width: 48px;
+    padding: 0 8px;
+  }
+
+  .todo-list__close {
+    width: 34px;
+    height: 34px;
+  }
+
+  .filter-btn {
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 11px;
+  }
+}
+
+/* ========================================
+   18. ACCESSIBILITY - REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
