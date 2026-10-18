@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="/styles/app.css" />
+
+    <link
+      rel="shortcut icon"
+      href="/images/Image (1).png"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <img src="/images/Image (1).png" alt="Todo logo" class="logo-img" />
+
+          <span class="logo-first">to</span>
+          <span class="logo-last">do.</span>
+        </div>
+
+        <p class="logo-text">
+          Organize and complete your pending tasks easily.
+        </p>
+      </header>
+
+      <!-- Main -->
+      <main class="main">
+        <h1>Your Tasks</h1>
+
+        <!-- Search Form -->
+        <form class="search-box__container" id="searchForm">
+          <div class="search-box">
+            <input
+              class="search-box__text"
+              type="search"
+              id="search"
+              name="search"
+              placeholder="Search tasks"
+              aria-label="Search tasks"
+            />
+          </div>
+
+          <button type="submit" class="search-box__btn" aria-label="Search">
+            <img src="/images/Icon.png" alt="" />
+          </button>
+        </form>
+
+        <!-- Task Information -->
+        <div class="task-info">
+          <div class="task-info__left">
+            <span>Total tasks:</span>
+            <span id="totalTasks">0</span>
+          </div>
+
+          <div class="task-info__right">
+            <span>Completed:</span>
+            <span id="completedTasks">0</span>
+          </div>
+        </div>
+
+        <!-- Task Filters -->
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button
+            type="button"
+            class="filter-btn active"
+            data-filter="all"
+            aria-pressed="true"
+          >
+            All
+          </button>
+
+          <button
+            type="button"
+            class="filter-btn"
+            data-filter="completed"
+            aria-pressed="false"
+          >
+            Completed
+          </button>
+
+          <button
+            type="button"
+            class="filter-btn"
+            data-filter="uncompleted"
+            aria-pressed="false"
+          >
+            Uncompleted
+          </button>
+        </div>
+
+        <!-- Todo List -->
+        <div class="todo-list">
+          <ul class="todo-list__items" id="todoList"></ul>
+
+          <div class="todo-list__none" id="emptyState">
+            <img src="/images/Vector.png" alt="" />
+
+            <p>You have no pending tasks.</p>
+            <p>Create one to get started.</p>
+          </div>
+        </div>
+
+        <!-- Add Todo Button -->
+        <button
+          type="button"
+          class="add-todo"
+          id="addTodoBtn"
+          aria-label="Add new task"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640"
+            aria-hidden="true"
+          >
+            <path
+              d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"
+            />
+          </svg>
+        </button>
+      </main>
+    </div>
+
+    <!-- Add Todo Modal -->
+    <div class="modal-overlay" id="todoModal" aria-hidden="true">
+      <div
+        class="todo-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+        aria-describedby="modalDescription"
+      >
+        <h2 id="modalTitle">Create New Task</h2>
+
+        <p class="modal-description" id="modalDescription">
+          Add a new task to your list.
+        </p>
+
+        <form id="todoForm">
+          <label for="todoInput">Task name</label>
+
+          <input
+            type="text"
+            id="todoInput"
+            class="modal-input"
+            name="todo"
+            placeholder="What do you need to do?"
+            maxlength="150"
+            autocomplete="off"
+            required
+          />
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              id="cancelTodoBtn"
+              class="modal-btn cancel-btn"
+            >
+              Cancel
+            </button>
+
+            <button type="submit" class="modal-btn add-btn">Add Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+  </body>
+</html>
